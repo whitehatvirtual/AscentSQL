@@ -7,17 +7,17 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{c3cf2a36-ae43-4e0f-94a0-1e4c26056fb5}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
     <RootNamespace>AscentSQL</RootNamespace>
     <AssemblyName>AscentSQL</AssemblyName>
-    <ModelCollation>1049,CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetLanguage>CS</TargetLanguage>
+    <TargetLanguage>VB</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
@@ -60,7 +60,7 @@
     <VardecimalStorageFormatOn>True</VardecimalStorageFormatOn>
     <SupplementalLoggingOn>False</SupplementalLoggingOn>
     <CompatibilityMode>130</CompatibilityMode>
-    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <AnsiNullDefault>False</AnsiNullDefault>
     <AnsiNulls>False</AnsiNulls>
     <AnsiPadding>False</AnsiPadding>
@@ -482,5 +482,9 @@
     <Build Include="Security\ascent.sql" />
     <Build Include="Security\m2ss.sql" />
     <Build Include="Security\Permissions.sql" />
+    <Build Include="dbo\Tables\control_state.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AscentSQL.refactorlog" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@
     [risk_id]                  INT            NULL,
     [maturity_id]              INT            NULL,
     [type_id]                  INT            NULL,
+    control_state_id            int null,
     [is_active]                BIT            DEFAULT ((1)) NULL,
     [created_on]               DATETIME       NULL,
     [updated_on]               DATETIME       DEFAULT (getdate()) NULL,
@@ -21,7 +22,8 @@
     CONSTRAINT [FK_control_maturity] FOREIGN KEY ([maturity_id]) REFERENCES [dbo].[maturity] ([maturity_id]),
     CONSTRAINT [FK_control_risk] FOREIGN KEY ([risk_id]) REFERENCES [dbo].[risk] ([risk_id]),
     CONSTRAINT [FK_control_section] FOREIGN KEY ([section_id]) REFERENCES [dbo].[section] ([section_id]),
-    CONSTRAINT [FK_control_type] FOREIGN KEY ([type_id]) REFERENCES [dbo].[type] ([type_id])
+    CONSTRAINT [FK_control_type] FOREIGN KEY ([type_id]) REFERENCES [dbo].[type] ([type_id]), 
+    CONSTRAINT [FK_control_control_state] FOREIGN KEY ([control_state_id]) REFERENCES [control_state]([control_state_id])
 );
 
 

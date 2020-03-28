@@ -2,8 +2,8 @@
 <DataComparison>
   <Version>10</Version>
   <ConnectionProperties1>
-    <ConnectionString>Data Source=localhost\sqlexpress;Initial Catalog=Ascent;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
-    <FullDisplayName>localhost\sqlexpress.Ascent (DESKTOP-Q1APEQ3\samir)</FullDisplayName>
+    <ConnectionString>Data Source=localhost;Initial Catalog=Ascent;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
+    <FullDisplayName>localhost.Ascent (DESKTOP-Q1APEQ3\samir)</FullDisplayName>
   </ConnectionProperties1>
   <ConnectionProperties2>
     <ConnectionString>Data Source=104.43.250.26;Initial Catalog=Ascent;Persist Security Info=True;User ID=whitehat;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseName>Ascent</TargetDatabaseName>
+    <DeployScriptFileName>AscentSQL.sql</DeployScriptFileName>
+    <TargetConnectionString>Data Source=104.43.250.26;Persist Security Info=True;User ID=whitehat;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
+    <BlockWhenDriftDetected>True</BlockWhenDriftDetected>
+    <RegisterDataTierApplication>True</RegisterDataTierApplication>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+  </PropertyGroup>
+</Project>
