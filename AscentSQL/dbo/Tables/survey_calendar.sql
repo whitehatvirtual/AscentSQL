@@ -8,8 +8,8 @@
     [created_by]           INT           NULL,
     [updated_by]           INT           NULL,
     [audit_client_id]      INT           NULL,
-    CONSTRAINT [PK_survey_calendar_survey_calendar_id] PRIMARY KEY CLUSTERED ([survey_calendar_id] ASC),
-    CONSTRAINT [survey_calendar$survey_calendar_UNIQUE] UNIQUE NONCLUSTERED ([survey_calendar_id] ASC)
+    CONSTRAINT [PK_survey_calendar_survey_calendar_id] PRIMARY KEY CLUSTERED ([survey_calendar_id] ASC)
+  
 );
 
 
