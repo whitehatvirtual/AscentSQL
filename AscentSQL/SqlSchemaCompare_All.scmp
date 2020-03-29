@@ -2,9 +2,10 @@
 <SchemaComparison>
   <Version>10</Version>
   <SourceModelProvider>
-    <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=localhost;Initial Catalog=Ascent;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
-    </ConnectionBasedModelProvider>
+    <ProjectBasedModelProvider>
+      <ProjectGuid>{c3cf2a36-ae43-4e0f-94a0-1e4c26056fb5}</ProjectGuid>
+      <Name>AscentSQL</Name>
+    </ProjectBasedModelProvider>
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>

@@ -1,0 +1,27 @@
+﻿CREATE TABLE [stage].['UCS MASTER'] (
+    [Obj]                 NVARCHAR (255) NULL,
+    [Obj Name]            NVARCHAR (255) NULL,
+    [Description]         NVARCHAR (MAX) NULL,
+    [Req]                 NVARCHAR (255) NULL,
+    [req_Description]     NVARCHAR (255) NULL,
+    [Sub Req]             NVARCHAR (255) NULL,
+    [sun_req_Description] NVARCHAR (255) NULL,
+    [v2019]               NVARCHAR (255) NULL,
+    [2016]                NVARCHAR (255) NULL,
+    [2017]                NVARCHAR (255) NULL,
+    [9/9#1]               NVARCHAR (255) NULL,
+    [800-53r4]            NVARCHAR (255) NULL,
+    [F13]                 NVARCHAR (255) NULL,
+    [F14]                 NVARCHAR (255) NULL,
+    [F15]                 NVARCHAR (255) NULL,
+    [F16]                 NVARCHAR (255) NULL,
+    [F17]                 NVARCHAR (255) NULL,
+    [F18]                 NVARCHAR (255) NULL,
+    [F19]                 NVARCHAR (255) NULL,
+    [F20]                 NVARCHAR (255) NULL,
+    [F21]                 NVARCHAR (255) NULL,
+    [F22]                 NVARCHAR (255) NULL,
+    [F23]                 NVARCHAR (255) NULL,
+    [F24]                 NVARCHAR (255) NULL
+);
+
