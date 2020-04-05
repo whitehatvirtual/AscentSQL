@@ -3,11 +3,11 @@
   <Version>10</Version>
   <ConnectionProperties1>
     <ConnectionString>Data Source=localhost;Initial Catalog=Ascent;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
-    <FullDisplayName>localhost.Ascent (DESKTOP-Q1APEQ3\samir)</FullDisplayName>
+    <FullDisplayName>localhost.Ascent (DESKTOP-50U1KQU\Samir)</FullDisplayName>
   </ConnectionProperties1>
   <ConnectionProperties2>
-    <ConnectionString>Data Source=104.43.250.26;Initial Catalog=Ascent;Persist Security Info=True;User ID=whitehat;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
-    <FullDisplayName>104.43.250.26.Ascent (whitehat)</FullDisplayName>
+    <ConnectionString>Data Source=ascentsqldev.centralus.cloudapp.azure.com;Initial Catalog=Ascent;Persist Security Info=True;User ID=whitehat;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
+    <FullDisplayName>ascentsqldev.centralus.cloudapp.azure.com.Ascent (whitehat)</FullDisplayName>
   </ConnectionProperties2>
   <SessionSettings>Default</SessionSettings>
 </DataComparison>

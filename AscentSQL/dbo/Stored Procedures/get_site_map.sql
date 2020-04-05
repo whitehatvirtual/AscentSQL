@@ -88,12 +88,13 @@ AS
 										  , f.[location_name] as name
 										  , f.[description] as caption
 										  , f.[display_order]
+                                          --, 'infoGrid' as [type]
 										  , f.[icon]
 										  , f.[is_active]
 										  , (
 												SELECT 
 														[location_id]
-														,p.property_name
+														,p.property_name as name
 														,[value]
 														,lp.[is_active]
 
@@ -103,34 +104,50 @@ AS
 												for json path
 											) as property
 										  ,(SELECT [component_id]
-												  ,[component_name]
+												  ,[component_name] as name
 												  ,c.[description]
 												  ,[location_id]
-												  ,t.type_name
-												  ,p.property_name
-												  ,[value]
+												  ,t.type_name as [type]
 												  ,c.[is_active]
+												  , (
+														SELECT 
+																cp.[component_id]
+																,p.property_name as name
+																,[value]
+																,cp.[is_active]
+
+														FROM [component_property] as cp
+															join property as p on cp.property_id =p.property_id
+														where cp.[component_id] = c.[component_id] and cp.is_active = 1
+														for json path
+													) as property
 
 											  FROM [component] as c
 											  join type as t on c.type_id = t.type_id
-											  join property as p on c.property_id = p.property_id 
-											  where c.location_id = f.location_id
+											  
+											  where c.location_id = f.location_id and c.is_active = 1
 											  for json path
 											) as component
 
 											from frame as f
-											where f.parent_id = ss.location_id
+											where f.parent_id = ss.location_id and f.is_active = 1
+											order by f.display_order asc
 											for json path
 										  ) as frame
 								from sub_section as ss
-								where ss.parent_id = s.location_id
+								where ss.parent_id = s.location_id and ss.is_active = 1
+								order by ss.display_order asc
 							    for json path
 							  ) as sub_section
 				  from section as s
-				  where s.parent_id = m.location_id
+				  
+				  where s.parent_id = m.location_id and s.is_active = 1
+				  order by s.display_order asc
 				  for json path
 		  ) as section
     from module as m
+	where is_active = 1
+	order by m.display_order asc
     for json path , root('module')
     END
 GO
