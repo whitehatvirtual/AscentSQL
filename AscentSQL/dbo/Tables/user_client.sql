@@ -2,6 +2,7 @@
     [user_client_id]  INT           IDENTITY (1, 1) NOT NULL,
     [user_id]         INT           NULL,
     [client_id]       INT           NULL,
+    type_id int null,
     [is_active]       BIT           DEFAULT ((1)) NULL,
     [created_on]      DATETIME2 (7) DEFAULT (getutcdate()) NULL,
     [updated_on]      DATETIME2 (7) DEFAULT (getutcdate()) NULL,

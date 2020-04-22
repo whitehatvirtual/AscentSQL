@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE get_location_all
+CREATE PROCEDURE [dbo].[get_location_all]
 	-- Add the parameters for the stored procedure here
 		 @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -22,16 +22,17 @@ BEGIN
 	
 	SELECT [location_id]
       ,[location_name]
-      ,[description]
-      ,[type_id]
+      ,l.[description]
+      ,t.[type_name] 
       ,[parent_id]
       ,[display_order]
-      ,[is_active]
-      ,[created_on]
-      ,[updated_on]
-      ,[created_by]
-      ,[updated_by]
-      ,[audit_client_id]
+      ,dbo.uf_get_status(l.[is_active]) as [status]
+      ,l.[created_on]
+      ,l.[updated_on]
+      ,l.[created_by]
+      ,l.[updated_by]
+      ,l.[audit_client_id]
   FROM [location] as l 
+  left join type as t on l.type_id = t.type_id
   
 END

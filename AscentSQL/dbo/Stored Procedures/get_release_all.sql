@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE get_release_all 
+CREATE PROCEDURE [dbo].[get_release_all] 
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
 		,@audit_client_id int 
@@ -29,7 +29,8 @@ BEGIN
 			SELECT  [release_id]
 				  ,[version_number]
 				  ,[description]
-				  ,[is_active]
+				  ,dbo.uf_get_status([is_active]) as [status]
+				  ,isnull([updated_on],[created_on]) as release_date
 				  ,[created_on]
 				  ,[updated_on]
 				  ,[created_by]

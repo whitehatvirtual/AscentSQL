@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE get_user_all
+CREATE PROCEDURE [dbo].[get_user_all]
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -16,16 +16,16 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT  [user_id]
-		  ,[first_name]
-		  ,[last_name]
+		  ,[first_name] as user_first_name
+		  ,[last_name] as user_last_name
 		  ,[email]
 		  ,[job_title]
 		  ,[time_zone]
-		  ,p.phone_no
-		  ,t.type_name
+		  ,p.phone_no as phone_number
+		  ,t.type_name as user_type
 		  ,[address_id]
-		  ,u.[is_active]
-		  ,u.[created_on]
+		  ,dbo.uf_get_status(u.[is_active]) as [status]
+		  ,u.[created_on] 
 		  ,u.[updated_on]
 		  ,u.[created_by]
 		  ,u.[updated_by]

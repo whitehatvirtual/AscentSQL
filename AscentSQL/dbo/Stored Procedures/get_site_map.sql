@@ -66,28 +66,28 @@ AS
     select  m.[location_id] 
 		  , m.[location_name] as name
 		  , m.[description] as caption
-		  , m.[display_order]
+		  , ISNULL(m.display_order,0) as [display_order]
 		  , m.[icon] 
 		  , m.[is_active] 
 		  , (select
 				    s.[location_id] 
 				  , s.[location_name] as name
 				  , s.[description] as caption
-				  , s.[display_order] 
+				  , ISNULL(s.display_order,0) as [display_order]
 				  , s.[icon] 
 				  , s.[is_active] 
 				  , (select
 							    ss.[location_id] 
 							  , ss.[location_name]  as name
 							  , ss.[description] as caption
-							  , ss.[display_order] 
+							  , ISNULL(ss.display_order,0) as [display_order]
 							  , ss.[icon] 
 							  , ss.[is_active] 
 							  , (select
 											 f.[location_id]
 										  , f.[location_name] as name
 										  , f.[description] as caption
-										  , f.[display_order]
+										  , ISNULL(f.display_order,0) as [display_order]
                                           --, 'infoGrid' as [type]
 										  , f.[icon]
 										  , f.[is_active]
@@ -109,6 +109,7 @@ AS
 												  ,[location_id]
 												  ,t.type_name as [type]
 												  ,c.[is_active]
+                                                  ,ISNULL(c.display_order,0) as [display_order]
 												  , (
 														SELECT 
 																cp.[component_id]
@@ -126,6 +127,7 @@ AS
 											  join type as t on c.type_id = t.type_id
 											  
 											  where c.location_id = f.location_id and c.is_active = 1
+                                              order by c.display_order
 											  for json path
 											) as component
 
@@ -140,7 +142,6 @@ AS
 							    for json path
 							  ) as sub_section
 				  from section as s
-				  
 				  where s.parent_id = m.location_id and s.is_active = 1
 				  order by s.display_order asc
 				  for json path

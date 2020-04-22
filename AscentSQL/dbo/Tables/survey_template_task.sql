@@ -4,7 +4,7 @@
     [survey_template_control_id] INT            NULL,
     [survey_template_task_name]  NVARCHAR (255) NULL,
     [description]                NVARCHAR (MAX) NULL,
-    [Schedule]                   VARCHAR (MAX)  NULL,
+    [calendar_date]                   DATETIME2 (7)  NULL,
     [type_id]                    INT            NULL,
     [is_active]                  BIT            DEFAULT ((1)) NULL,
     [created_on]                 DATETIME2 (7)  DEFAULT (getutcdate()) NULL,

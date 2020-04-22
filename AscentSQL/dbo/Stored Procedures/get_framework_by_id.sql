@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE get_framework_by_id
+CREATE PROCEDURE [dbo].[get_framework_by_id]
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -40,7 +40,7 @@ declare @framework_id int
 				,[framework_name]
 				,[version]
 				,[description]
-				,[is_active]
+				,[is_active] as [status]
 				,[is_master]
 				,[created_on]
 				,[updated_on]

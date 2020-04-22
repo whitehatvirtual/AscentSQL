@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[get_control_all]
+CREATE PROCEDURE [dbo].[get_control_all]
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -31,26 +31,29 @@ BEGIN
 
 			SELECT  [control_id]
 				  ,[control_id_text]
-				  ,c.[description]
+				  ,c.[description] as control_description
 				  ,[artifacts_example]
 				  ,[remediation_requirements]
 				  ,[master_control_id]
-				  ,s.section_name
-				  ,f.frequency_name
+				  ,s.section_name as control_section_name
+				  ,fa.section_name as control_family_name
+				  ,f.frequency_name as frequency
 				  ,r.risk_name
 				  ,m.maturity_name
 				  ,t.type_name
-				  ,c.[is_active]
-				  ,c.[created_on]
+				  ,dbo.uf_get_status(c.[is_active]) as [status]
+				  ,c.[created_on] as created_on
 				  ,c.[updated_on]
-				  ,c.[created_by]
+				  ,[dbo].[uf_get_user_fullname](c.[created_by]) as owner_name
 				  ,c.[updated_by]
 				  ,c.[audit_client_id]
 			  FROM [control] as c 
 			  left join section as s on c.section_id = s.section_id
+			  left join section as fa on s.parent_section_id = fa.section_id and fa.parent_section_id is null
 			  left join frequency as f on c.frequency_id = f.frequency_id
 			  left join risk as r on c.risk_id = r.risk_id
 			  left join maturity as m on c.maturity_id = m.maturity_id
 			  left join type as t on c.type_id = t.type_id
+
 		end
 END

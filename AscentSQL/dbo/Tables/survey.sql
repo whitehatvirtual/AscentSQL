@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[survey] (
     [survey_id]          INT            IDENTITY (1, 1) NOT NULL,
     [survey_template_id] INT            NULL,
+    [client_id]            INT null,
     [survey_name]        NVARCHAR (255) NULL,
     [description]        NVARCHAR (MAX) NULL,
     [type_id]            INT            NULL,

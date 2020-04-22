@@ -8,6 +8,8 @@
     [user_id]           INT            NULL,
     [survey_control_id] INT            NULL,
     [document_id]       INT            NULL,
+    [answer_id]         INT            NULL,
+    [calendar_date]     DATETIME2 (7)  NULL,
     [is_active]         BIT            DEFAULT ((1)) NULL,
     [created_on]        DATETIME2 (7)  DEFAULT (getutcdate()) NULL,
     [updated_on]        DATETIME2 (7)  DEFAULT (getutcdate()) NULL,

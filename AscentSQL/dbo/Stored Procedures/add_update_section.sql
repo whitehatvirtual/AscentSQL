@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE add_update_section 
+CREATE PROCEDURE [dbo].[add_update_section] 
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -16,6 +16,10 @@ BEGIN
 
     -- Insert statements for procedure here
 	declare @section_id int
+	declare @sp_out  table
+		(id int 
+		 ,ActionTaken nvarchar(10)
+		);
 
 	if (select ISJSON(@jsonVariable) ) =0
 	begin
@@ -26,6 +30,9 @@ BEGIN
 	end
 
 	else
+	
+  
+
 
 	begin
 		select  @section_id = section_id
@@ -47,6 +54,7 @@ BEGIN
 				,is_active = s.is_active
 				,updated_by = s.audit_user_id
 				,audit_client_id = s.audit_client_id
+			output inserted.section_id, 'U' into @sp_out
 			from section as t
 			join (
    					SELECT  section_id
@@ -69,6 +77,7 @@ BEGIN
 						) AS j
 				) as s on t.section_id = s.section_id
 
+
 	   end
 	   else
 	   begin
@@ -79,6 +88,7 @@ BEGIN
 					   ,[parent_section_id]
 					   ,[created_by]
 					   ,[audit_client_id])
+			output inserted.section_id, 'I' into @sp_out
 
    			SELECT   section_name
 					,description
@@ -96,6 +106,7 @@ BEGIN
 						,is_active bit  N'$.section.is_active'
 				) AS j
 	   end
-
+	   select * from @sp_out
 	end
+
 END

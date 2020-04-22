@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[get_news_all] 
+CREATE PROCEDURE [dbo].[get_audit_table_all]
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -15,26 +15,9 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	if (select ISJSON(@jsonVariable) ) =0
-		begin
-
-			select 'input not JSON format!'
-			return
-
-		end
-
-		else
-
-		begin
-			SELECT [news_id]
-			  ,[news_title]
-			  ,[description]
-			  ,dbo.uf_get_status([is_active]) as [status]
-			  ,[created_on]
-			  ,[updated_on]
-			  ,[created_by]
-			  ,[updated_by]
-			  ,[audit_client_id]
-		  FROM [news]
-		end
+	SELECT [audit_table_id]
+		  ,[table_name]
+		  ,dbo.uf_get_status([enabled]) as [status]
+		  ,[operation_date]
+	  FROM [audit_table]
 END

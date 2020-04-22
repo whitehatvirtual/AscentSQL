@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE get_framework_all
+CREATE PROCEDURE [dbo].[get_framework_all]
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -31,7 +31,7 @@ if (select ISJSON(@jsonVariable) ) =0
 				,[framework_name]
 				,[version]
 				,[description]
-				,[is_active]
+				,dbo.uf_get_status([is_active]) as [status]
 				,[is_master]
 				,[created_on]
 				,[updated_on]
