@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE data_admin_framework_framework_list_framework_add_edit_list_get 
+CREATE PROCEDURE [dbo].[data_admin_framework_framework_list_framework_add_edit_list_get] 
 	-- Add the parameters for the stored procedure here
 		 @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -19,6 +19,6 @@ BEGIN
 			   @jsonVariable
 			  ,@audit_user_id
 			  ,@audit_client_id
-
+	--SELECT OBJECT_NAME(@@PROCID)
 
 END

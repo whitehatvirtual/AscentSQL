@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE add_update_framework 
+CREATE PROCEDURE [dbo].[add_update_framework] 
 	-- Add the parameters for the stored procedure here
 	     @jsonVariable NVARCHAR(MAX)
 		,@audit_user_id int 
@@ -30,9 +30,9 @@ BEGIN
 	begin
 		select  @framework_id = framework_id
 	
-		FROM OPENJSON (@jsonVariable, N'$')
+		FROM OPENJSON (@jsonVariable, N'$.framework_add_edit')
 		  WITH (
-				   framework_id  int  N'$.framework.framework_id' 
+				   framework_id  int  N'$.framework_id' 
 
 			) AS [framework];
 
@@ -43,6 +43,7 @@ BEGIN
 				,version = fi.version
 				,description = fi.description
 				,is_master = fi.is_master
+				,is_active = fi.is_active
 				,updated_on = GETUTCDATE()
 				,updated_by = fi.audit_user_id
 				,audit_client_id = fi.audit_client_id
@@ -52,17 +53,18 @@ BEGIN
 							,framework_name
 							,version
 							,description
+							,is_active
 							,is_master 
 							,@audit_user_id  as audit_user_id 
 							,@audit_client_id as audit_client_id 
-					FROM OPENJSON (@jsonVariable, N'$')
+					FROM OPENJSON (@jsonVariable, N'$.framework_add_edit')
 					  WITH (
-								framework_id nvarchar(255) N'$.framework.framework_id'
-							   ,framework_name nvarchar(255) N'$.framework.framework_name'
-							   ,version nvarchar(255) N'$.framework.version'
-							   ,description nvarchar(max) N'$.framework.description'
-							   ,is_active bit  N'$.framework.is_active'
-							   ,is_master bit  N'$.framework.is_master'
+								framework_id nvarchar(255) N'$.framework_id'
+							   ,framework_name nvarchar(255) N'$.framework_name'
+							   ,version nvarchar(255) N'$.version'
+							   ,description nvarchar(max) N'$.description'
+							   ,is_active bit  N'$.status'
+							   ,is_master bit  N'$.is_master'
 						) AS framework
 				) as fi on f.framework_id = fi.framework_id
 
@@ -83,14 +85,14 @@ BEGIN
 					,is_master
 					,@audit_user_id 
 					,@audit_client_id
-			FROM OPENJSON (@jsonVariable, N'$')
+			FROM OPENJSON (@jsonVariable, N'$.framework_add_edit')
 			  WITH (
-						framework_id nvarchar(255) N'$.framework.framework_id'
-					   ,framework_name nvarchar(255) N'$.framework.framework_name'
-					   ,version nvarchar(255) N'$.framework.version'
-					   ,description nvarchar(max) N'$.framework.description'
-					   ,is_active bit  N'$.framework.is_active'
-					   ,is_master bit  N'$.framework.is_master'
+						framework_id nvarchar(255) N'$.framework_id'
+					   ,framework_name nvarchar(255) N'$.framework_name'
+					   ,version nvarchar(255) N'$.version'
+					   ,description nvarchar(max) N'$.description'
+					   ,is_active bit  N'$.status'
+					   ,is_master bit  N'$.is_master'
 				) AS framework;
 	   end
 

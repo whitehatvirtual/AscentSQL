@@ -17,6 +17,13 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_SSMA_SOURCE', @value = N'ascent.location', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'location';
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [idx_nc_u_location_location_name]
+    ON [dbo].[location]([location_name] ASC, [parent_id] ASC);
 

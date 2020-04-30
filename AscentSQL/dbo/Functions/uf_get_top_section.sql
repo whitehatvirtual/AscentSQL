@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE FUNCTION uf_get_top_section
+CREATE FUNCTION [dbo].[uf_get_top_section]
 (
 	-- Add the parameters for the function here
 	@section_id int
@@ -44,7 +44,7 @@ BEGIN
 			  ,[parent_section_id]
       
 		  FROM [section]
-		  where section_id = 27
+		  where section_id = @section_id
 		  union  all
 		  SELECT  s.[section_id]
 			  ,s.[section_id_text]

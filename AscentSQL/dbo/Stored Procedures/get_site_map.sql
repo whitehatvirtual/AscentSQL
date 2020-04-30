@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[get_site_map]
-    @jsonVariable NVARCHAR(MAX)
-	,    @audit_user_id int 
-	,    @audit_client_id int
+		 @jsonVariable NVARCHAR(MAX)
+		,@audit_user_id int 
+		,@audit_client_id int
 AS 
      BEGIN
 
@@ -9,57 +9,76 @@ AS
 
     SET  NOCOUNT  ON
     ;
-    with module as
+
+	----------------------------------
+	--- Manage Loging here , get id
+	----------------------------------
+    with ua as
+		(SELECT 
+      		  ua.[location_id]
+			  ,uc.user_id
+			  ,uc.client_id
+			  ,ua.is_active
+		  FROM [user_access] as ua
+		  join user_client as uc on ua.user_client_id = uc.user_client_id 
+		  where uc.user_id = @audit_user_id 
+				and uc.client_id = @audit_client_id 
+				and ua.is_active = 1
+		 ),module as
         (
-            SELECT [location_id]
+            SELECT l.[location_id]
             , [location_name]
             , [description]
-            , [type_id]
+            , l.[type_id]
             , [parent_id]
             , [display_order]
 			, dbo.uf_get_icon([location_name]) as Icon
-            , [is_active]
-            FROM [location] 
+            , l.[is_active]
+            FROM [location] as l
+			join ua on l.location_id = ua.location_id 
             where parent_id is null
 
 
         ), section as
         (
-            SELECT [location_id]
+            SELECT section.[location_id]
             , [location_name]
             , [description]
-            , [type_id]
+            , section.[type_id]
             , [parent_id]
             , [display_order]
 			, dbo.uf_get_icon([location_name]) as Icon
-            , [is_active]
+            , section.[is_active]
 
             FROM [location] as section
+			join  ua on section.location_id = ua.location_id 
             where parent_id in (SELECT [location_id]
             FROM module)
         ), sub_section as
         (
-            SELECT [location_id]
+            SELECT sub_section.[location_id]
             , [location_name] 
             , [description]
-            , [type_id]
+            , sub_section.[type_id]
             , [parent_id]
             , [display_order]
 			, dbo.uf_get_icon([location_name]) as Icon
-            , [is_active]
+            , sub_section.[is_active]
             FROM [location] as sub_section
+			join  ua on sub_section.location_id = ua.location_id 
             where parent_id in (SELECT [location_id] FROM section)
         ), frame as
         (
-            SELECT [location_id]
+            SELECT frame.[location_id]
             , [location_name]
             , [description]
-            , [type_id]
+            , frame.[type_id]
             , [parent_id]
             , [display_order]
-            , [is_active]
+            , frame.[is_active]
 			, dbo.uf_get_icon([location_name]) as Icon
             FROM [location] as frame
+			join ua on frame.location_id = ua.location_id 
             where parent_id in (SELECT [location_id] FROM sub_section)
         )
 

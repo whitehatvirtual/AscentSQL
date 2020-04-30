@@ -47,6 +47,7 @@ BEGIN
 				  ,[dbo].[uf_get_user_fullname](c.[created_by]) as owner_name
 				  ,c.[updated_by]
 				  ,c.[audit_client_id]
+				  --,'Timeline' as timeline
 			  FROM [control] as c 
 			  left join section as s on c.section_id = s.section_id
 			  left join section as fa on s.parent_section_id = fa.section_id and fa.parent_section_id is null

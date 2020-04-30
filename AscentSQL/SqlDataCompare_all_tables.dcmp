@@ -2,7 +2,7 @@
 <DataComparison>
   <Version>10</Version>
   <ConnectionProperties1>
-    <ConnectionString>Data Source=localhost;Initial Catalog=Ascent;Integrated Security=True;Pooling=False</ConnectionString>
+    <ConnectionString>Data Source=localhost;Initial Catalog=Ascent;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
     <FullDisplayName>localhost.Ascent (DESKTOP-50U1KQU\Samir)</FullDisplayName>
   </ConnectionProperties1>
   <ConnectionProperties2>
@@ -10,4 +10,5 @@
     <FullDisplayName>ascentsqldev.centralus.cloudapp.azure.com.Ascent (whitehat)</FullDisplayName>
   </ConnectionProperties2>
   <SessionSettings>Default</SessionSettings>
+  <DeselectedTable>[dbo].[audit_data]</DeselectedTable>
 </DataComparison>

@@ -3,8 +3,11 @@
     [maturity_name] NVARCHAR (255) NOT NULL,
     [weight]        INT            NOT NULL,
     [is_active]     BIT            DEFAULT ((1)) NOT NULL,
+    [color]         VARCHAR (30)   NULL,
     CONSTRAINT [PK_maturity_maturity_id] PRIMARY KEY CLUSTERED ([maturity_id] ASC)
 );
+
+
 
 
 GO

@@ -29,18 +29,25 @@ declare @framework_id int
 
 	begin
 		select  @framework_id = framework_id
-	
-		FROM OPENJSON (@jsonVariable, N'$')
+		
+		FROM OPENJSON (@jsonVariable, N'$.frame.framework_list')
 		  WITH (
-				   framework_id  int  N'$.framework.framework_id' 
+				   framework_id  int  N'$.framework_id' 
 
 			) AS [framework];
+	
+		--FROM OPENJSON (@jsonVariable, N'$')
+		--  WITH (
+		--		   framework_id  int  N'$.framework.framework_id' 
+
+		--	) AS [framework];
 
 		SELECT  [framework_id]
 				,[framework_name]
 				,[version]
 				,[description]
-				,[is_active] as [status]
+				,cast([is_active] as int) as [status]
+				
 				,[is_master]
 				,[created_on]
 				,[updated_on]

@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE system_add_frame_components 
+CREATE PROCEDURE [dbo].[system_add_frame_components] 
 	-- Add the parameters for the stored procedure here
 	  @sp varchar(255) 
 	 ,@location_id int 
@@ -66,64 +66,91 @@ BEGIN
 
 
 	;
-	with loc as (
+
+	merge [sp_map] as target
+	using (
+
+					SELECT		 @location_id as location_id , @sp as [read_sp_name] ,location_path
+					from  [dbo].[uf_get_location_path] (@location_id,'_')
+
+		) as source
+	on target.location_id = source.location_id
+	WHEN MATCHED 
+		then update set target.[read_sp_name] = source.[read_sp_name]
+						,target.call_sp_name = source.location_path
+						
+	WHEN NOT MATCHED BY TARGET 
+		THEN insert (location_id
+					,[read_sp_name]
+					,call_sp_name
+				   
+				   ) 
+		values ( source.location_id
+				,source.[read_sp_name]
+				,source.location_path
+				)
+	;
 
 
-	select [location_id]
-		  ,[location_name]
-		  ,parent_id
-		  ,1 as level
+
+	--with loc as (
+
+
+	--select [location_id]
+	--	  ,[location_name]
+	--	  ,parent_id
+	--	  ,1 as level
       
-	  FROM [location]
-	  where location_id = @location_id
-	  union all
-	  select s.[location_id]
-		  ,s.[location_name]
-		  ,s.parent_id
-		  ,l.level + 1
-	  from [location] as s
-	  join loc as l on l.parent_id = s.location_id
-	  --where l.location_id = 191
+	--  FROM [location]
+	--  where location_id = @location_id
+	--  union all
+	--  select s.[location_id]
+	--	  ,s.[location_name]
+	--	  ,s.parent_id
+	--	  ,l.level + 1
+	--  from [location] as s
+	--  join loc as l on l.parent_id = s.location_id
+	--  --where l.location_id = 191
  
 
-	)
+	--)
 
 
-	select @location_sp = ( select location_name+'_' 
-	from loc 
-	order by level desc
-	FOR XML PATH('')
-	)
+	--select @location_sp = ( select location_name+'_' 
+	--from loc 
+	--order by level desc
+	--FOR XML PATH('')
+	--)
 
 
-	IF (OBJECT_ID(@location_sp) IS NOT NULL)
-	BEGIN
-		exec('DROP procedure [dbo].[data_'+@location_sp+'list_get]')
+	--IF (OBJECT_ID(@location_sp) IS NOT NULL)
+	--BEGIN
+	--	exec('DROP procedure [dbo].[data_'+@location_sp+'list_get]')
 
 
-	END;
+	--END;
 
-	select @sql =
-	'
-	create PROCEDURE [dbo].[data_'+@location_sp+'list_get] 
-		-- Add the parameters for the stored procedure here
-			 @jsonVariable NVARCHAR(MAX)
-			,@audit_user_id int 
-			,@audit_client_id int
-	AS
-	BEGIN
-		-- SET NOCOUNT ON added to prevent extra result sets from
-		-- interfering with SELECT statements.
-		SET NOCOUNT ON;
+	--select @sql =
+	--'
+	--create PROCEDURE [dbo].[data_'+@location_sp+'list_get] 
+	--	-- Add the parameters for the stored procedure here
+	--		 @jsonVariable NVARCHAR(MAX)
+	--		,@audit_user_id int 
+	--		,@audit_client_id int
+	--AS
+	--BEGIN
+	--	-- SET NOCOUNT ON added to prevent extra result sets from
+	--	-- interfering with SELECT statements.
+	--	SET NOCOUNT ON;
 
-		-- Insert statements for procedure here
-		EXECUTE  '+@sp+'  
-				   @jsonVariable
-				  ,@audit_user_id
-				  ,@audit_client_id
+	--	-- Insert statements for procedure here
+	--	EXECUTE  '+@sp+'  
+	--			   @jsonVariable
+	--			  ,@audit_user_id
+	--			  ,@audit_client_id
 
 
-	END
-	'
-	exec(@sql)
+	--END
+	--'
+	--exec(@sql)
 END

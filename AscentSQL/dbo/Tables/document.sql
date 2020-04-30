@@ -2,6 +2,7 @@
     [document_id]     INT             IDENTITY (1, 1) NOT NULL,
     [location_id]     INT             NULL,
     [folder_id]       INT             NULL,
+    [key] varchar(max) null,
     [url]             NVARCHAR (MAX)  NOT NULL,
     [file_name]       NVARCHAR (255)  NOT NULL,
     [file_extension]  NVARCHAR (10)   NOT NULL,
